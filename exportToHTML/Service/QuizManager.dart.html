@@ -1,0 +1,89 @@
+<html>
+<head>
+<title>QuizManager.dart</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #000000;}
+.s1 { color: #008000; font-weight: bold;}
+.s2 { color: #000080; font-weight: bold;}
+.s3 { color: #0000ff;}
+.s4 { color: #808080; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+QuizManager.dart</font>
+</center></td></tr></table>
+<pre>import <span class="s1">'Question.dart'</span>;
+import <span class="s1">'Option.dart'</span>;
+
+<span class="s2">class </span>QuizManager {
+  QuizManager() {
+    _questions.add(Question(<span class="s1">'Türkiye' 'nin başkenti neresidir?'</span>, [
+      Option(<span class="s1">'Ankara'</span>, <span class="s3">10</span>),
+      Option(<span class="s1">'İstanbul'</span>, <span class="s3">5</span>),
+      Option(<span class="s1">'Zurich'</span>, <span class="s3">0</span>),
+      Option(<span class="s1">'Fransa'</span>, -<span class="s3">5</span>),
+    ]));
+
+    _questions.add(Question(<span class="s1">'Fransa' 'nın başkenti neresidir?'</span>, [
+      Option(<span class="s1">'Paris'</span>, <span class="s3">10</span>),
+      Option(<span class="s1">'Milano'</span>, <span class="s3">5</span>),
+      Option(<span class="s1">'Lens'</span>, <span class="s3">0</span>),
+      Option(<span class="s1">'Türkiye'</span>, -<span class="s3">5</span>),
+    ]));
+    _questions.add(Question(<span class="s1">'İngiltere' 'nin başkenti neresidir?'</span>, [
+      Option(<span class="s1">'Londra'</span>, <span class="s3">10</span>),
+      Option(<span class="s1">'Leeds'</span>, <span class="s3">5</span>),
+      Option(<span class="s1">'İstanbul'</span>, <span class="s3">0</span>),
+      Option(<span class="s1">'Africa'</span>, -<span class="s3">5</span>),
+    ]));
+
+    _questions.add(Question(<span class="s1">'Almanya' 'nin başkenti neresidir?'</span>, [
+      Option(<span class="s1">'Berlin'</span>, <span class="s3">10</span>),
+      Option(<span class="s1">'Hamburg'</span>, <span class="s3">5</span>),
+      Option(<span class="s1">'Napoli'</span>, <span class="s3">0</span>),
+      Option(<span class="s1">'Roma'</span>, <span class="s3">0</span>),
+    ]));
+    _questions.shuffle();
+    <span class="s2">for </span>(<span class="s2">var </span>question <span class="s2">in </span>_questions) {
+      question.options.shuffle();
+    }
+  }
+  List&lt;Question&gt; _questions = [];
+  int _score = <span class="s3">0</span>;
+  int currentQuestionId = <span class="s3">0</span>;
+  <span class="s2">void </span>nextQuestion(score) {
+    <span class="s2">if </span>(currentQuestionId &lt; _questions.length) {
+      _score += score;
+      currentQuestionId++;
+    }
+    print(currentQuestionId);
+  }
+
+  int getTotalScore() =&gt; _score;
+  int getCurrentId() =&gt; currentQuestionId + <span class="s3">1</span>;
+  int totalQuestionNumber() =&gt; _questions.length;
+  bool isFinished() {
+    <span class="s2">return </span>currentQuestionId &gt;= _questions.length;
+    <span class="s4">/* if(currentQuestionId &gt;= _questions.length -1) { 
+      return true; 
+    } else { 
+      return false; 
+    } 
+    */</span>
+  }
+
+  Question getCurrentQuestion() {
+    print(<span class="s1">'getCurrentQuestion </span>$currentQuestionId<span class="s1">'</span>);
+    <span class="s2">if </span>(currentQuestionId &lt; _questions.length) {
+      <span class="s2">return </span>_questions[currentQuestionId];
+    } <span class="s2">else </span>{
+      <span class="s2">return </span>Question(<span class="s1">''</span>, []);
+    }
+  }
+}</pre>
+</body>
+</html>

@@ -1,0 +1,89 @@
+<html>
+<head>
+<title>QuizManager2.dart</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #000000;}
+.s1 { color: #008000; font-weight: bold;}
+.s2 { color: #000080; font-weight: bold;}
+.s3 { color: #0000ff;}
+.s4 { color: #808080; font-style: italic;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+QuizManager2.dart</font>
+</center></td></tr></table>
+<pre>import <span class="s1">'Question.dart'</span>;
+import <span class="s1">'Option.dart'</span>;
+
+<span class="s2">class </span>QuizManager2 {
+  QuizManager2() {
+    _questions.add(Question(<span class="s1">'1984 Kitabının Yazarı Kimdir?'</span>, [
+      Option(<span class="s1">'George Orwell'</span>, <span class="s3">10</span>),
+      Option(<span class="s1">'Oscar Wild'</span>, <span class="s3">5</span>),
+      Option(<span class="s1">'Charles Dickens'</span>, <span class="s3">0</span>),
+      Option(<span class="s1">'Andy Weir'</span>, -<span class="s3">5</span>),
+    ]));
+
+    _questions.add(Question(<span class="s1">'Beyaz Diş Kitabının Yazarı Kimdir?'</span>, [
+      Option(<span class="s1">'Jack London'</span>, <span class="s3">10</span>),
+      Option(<span class="s1">'Oscar Wild'</span>, <span class="s3">5</span>),
+      Option(<span class="s1">'Fyodor Dostoyevski'</span>, <span class="s3">0</span>),
+      Option(<span class="s1">'Charles Dickens'</span>, -<span class="s3">5</span>),
+    ]));
+    _questions.add(Question(<span class="s1">'İçimizdeki Şeytan Kitabının Yazarı Kimdir?'</span>, [
+      Option(<span class="s1">'Sabahattin Ali'</span>, <span class="s3">10</span>),
+      Option(<span class="s1">'Orhan Kemal'</span>, <span class="s3">5</span>),
+      Option(<span class="s1">'Turgut Uyar'</span>, <span class="s3">0</span>),
+      Option(<span class="s1">'Nazım Hikmet'</span>, -<span class="s3">5</span>),
+    ]));
+
+    _questions.add(Question(<span class="s1">'Ateşten Gömlek Kitabının Yazarı Kimdir?'</span>, [
+      Option(<span class="s1">'Halide Edip Adıvar'</span>, <span class="s3">10</span>),
+      Option(<span class="s1">'Orhan Kemal'</span>, <span class="s3">5</span>),
+      Option(<span class="s1">'Sabahattin Ali'</span>, <span class="s3">0</span>),
+      Option(<span class="s1">'Namık Kemal'</span>, <span class="s3">0</span>),
+    ]));
+    _questions.shuffle();
+    <span class="s2">for </span>(<span class="s2">var </span>question <span class="s2">in </span>_questions) {
+      question.options.shuffle();
+    }
+  }
+  List&lt;Question&gt; _questions = [];
+  int _score = <span class="s3">0</span>;
+  int currentQuestionId = <span class="s3">0</span>;
+  <span class="s2">void </span>nextQuestion(score) {
+    <span class="s2">if </span>(currentQuestionId &lt; _questions.length) {
+      _score += score;
+      currentQuestionId++;
+    }
+    print(currentQuestionId);
+  }
+
+  int getTotalScore() =&gt; _score;
+  int getCurrentId() =&gt; currentQuestionId + <span class="s3">1</span>;
+  int totalQuestionNumber() =&gt; _questions.length;
+  bool isFinished() {
+    <span class="s2">return </span>currentQuestionId &gt;= _questions.length;
+    <span class="s4">/* if(currentQuestionId &gt;= _questions.length -1) { 
+      return true; 
+    } else { 
+      return false; 
+    } 
+    */</span>
+  }
+
+  Question getCurrentQuestion() {
+    print(<span class="s1">'getCurrentQuestion </span>$currentQuestionId<span class="s1">'</span>);
+    <span class="s2">if </span>(currentQuestionId &lt; _questions.length) {
+      <span class="s2">return </span>_questions[currentQuestionId];
+    } <span class="s2">else </span>{
+      <span class="s2">return </span>Question(<span class="s1">''</span>, []);
+    }
+  }
+}</pre>
+</body>
+</html>

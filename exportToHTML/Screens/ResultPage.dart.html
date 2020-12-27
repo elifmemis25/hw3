@@ -1,0 +1,59 @@
+<html>
+<head>
+<title>ResultPage.dart</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #000000;}
+.s1 { color: #008000; font-weight: bold;}
+.s2 { color: #000080; font-weight: bold;}
+.s3 { color: #0000ff;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+ResultPage.dart</font>
+</center></td></tr></table>
+<pre>import <span class="s1">'package:flutter/material.dart'</span>;
+
+<span class="s2">class </span>ResultPage <span class="s2">extends </span>StatefulWidget {
+  int score;
+  ResultPage({Key key, <span class="s2">this</span>.score}) : <span class="s2">super</span>(key: key);
+  @override
+  _ResultPageState createState() =&gt; _ResultPageState();
+}
+
+<span class="s2">class </span>_ResultPageState <span class="s2">extends </span>State&lt;ResultPage&gt; {
+  @override
+  Widget build(BuildContext context) {
+    <span class="s2">return </span>Scaffold(
+      appBar: AppBar(
+        title: Text(<span class="s1">' Sonuç '</span>),
+      ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          CircleAvatar(
+            child: Image.asset(
+              <span class="s1">'assets/true.png'</span>,
+              width: <span class="s3">200</span>,
+              height: <span class="s3">200</span>,
+            ),
+          ),
+          Text(
+            <span class="s1">'Tebrikler Puanınız'</span>,
+            style: TextStyle(fontSize: <span class="s3">30</span>),
+          ),
+          Text(
+            <span class="s1">'</span>${widget.score}<span class="s1">'</span>,
+            style: TextStyle(fontSize: <span class="s3">20</span>, fontWeight: FontWeight.w900),
+          ),
+        ],
+      ),
+    );
+  }
+}</pre>
+</body>
+</html>

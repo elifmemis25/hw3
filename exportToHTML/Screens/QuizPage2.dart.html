@@ -1,0 +1,104 @@
+<html>
+<head>
+<title>QuizPage2.dart</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #000000;}
+.s1 { color: #008000; font-weight: bold;}
+.s2 { color: #000080; font-weight: bold;}
+.s3 { color: #0000ff;}
+</style>
+</head>
+<body bgcolor="#ffffff">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#c0c0c0" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+QuizPage2.dart</font>
+</center></td></tr></table>
+<pre>import <span class="s1">'package:quizapp/Screens/ResultPage.dart'</span>;
+import <span class="s1">'package:quizapp/Service/Question.dart'</span>;
+import <span class="s1">'package:quizapp/Service/QuizManager2.dart'</span>;
+import <span class="s1">'package:flutter/material.dart'</span>;
+
+<span class="s2">class </span>QuizPage2 <span class="s2">extends </span>StatefulWidget {
+  @override
+  _QuizPage2State createState() =&gt; _QuizPage2State();
+}
+
+<span class="s2">class </span>_QuizPage2State <span class="s2">extends </span>State&lt;QuizPage2&gt; {
+  QuizManager2 _manager = QuizManager2();
+
+  List&lt;Widget&gt; getOptions(Question question) {
+    List&lt;Widget&gt; optionButtons = [];
+    <span class="s2">for </span>(int i = <span class="s3">0</span>; i &lt; question.options.length; i++) {
+      optionButtons.add(FlatButton(
+        onPressed: () {
+          _manager.nextQuestion(_manager.getCurrentQuestion().options[i].score);
+          <span class="s2">if </span>(_manager.isFinished()) {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) =&gt; ResultPage(
+                  score: _manager.getTotalScore(),
+                )));
+          }
+          setState(() {});
+        },
+        child: Container(
+          width: double.infinity,
+          padding: EdgeInsets.all(<span class="s3">10</span>),
+          decoration: BoxDecoration(
+            color: Colors.indigo[<span class="s3">400</span>],
+            borderRadius: BorderRadius.circular(<span class="s3">10</span>),
+          ),
+          child: Text(
+            <span class="s1">'</span>${_manager.getCurrentQuestion().options[i].text}<span class="s1">'</span>,
+            style: TextStyle(
+              fontSize: <span class="s3">25</span>,
+            ),
+          ),
+        ),
+      ));
+    }
+    <span class="s2">return </span>optionButtons;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    <span class="s2">return </span>Scaffold(
+        appBar: AppBar(
+          title: Text(
+              <span class="s1">'Questions </span>${_manager.getCurrentId()}<span class="s1">/</span>${_manager.totalQuestionNumber()}<span class="s1">'</span>),
+        ),
+        body: Container(
+          padding: EdgeInsets.all(<span class="s3">10</span>),
+          child: Column(
+            children: [
+              Expanded(
+                flex: <span class="s3">1</span>,
+                child: Container(
+                  padding: EdgeInsets.symmetric(vertical: <span class="s3">30</span>),
+                  child: Text(
+                    <span class="s1">'</span>${_manager.getCurrentQuestion().text}<span class="s1">'</span>,
+                    style: TextStyle(
+                      fontSize: <span class="s3">20</span>,
+                    ),
+                  ),
+                ),
+              ),
+              Expanded(
+                flex: <span class="s3">4</span>,
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: <span class="s3">20</span>),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: getOptions(_manager.getCurrentQuestion()),
+                  ),
+                ),
+              )
+            ],
+          ),
+        ));
+  }
+}</pre>
+</body>
+</html>
